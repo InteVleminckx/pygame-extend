@@ -1,0 +1,22 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pygame-extend"
+version = "0.1.0"
+description = "Minimal logic/render-separated game loop toolkit for pygame projects"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+# core is pygame-free by design; the backend needs it
+pygame = ["pygame-ce>=2.5"]
+dev = ["pytest>=8.0", "pygame-ce>=2.5"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pygext"]
+
+[project.urls]
+Repository = "https://github.com/yourname/pygame-extend"
