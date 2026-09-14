@@ -83,25 +83,29 @@ def test_player_moves():
 
 No `pygame.init()`, no display, no `SDL_VIDEODRIVER=dummy` workarounds.
 
-## Installing as a dependency
+## Installing as a dependency (Poetry)
 
 From a git repo, in another project's `pyproject.toml`:
 
 ```toml
-[project]
-dependencies = [
-    "pygame-extend @ git+https://github.com/yourname/pygame-extend.git",
-]
+[tool.poetry.dependencies]
+pygame-extend = { git = "https://github.com/InteVleminckx/pygame-extend.git", extras = ["pygame"] }
 ```
 
 Or for local development against a checked-out copy:
 
 ```toml
-[tool.uv.sources]
-pygame-extend = { path = "../pygame-extend", editable = true }
+[tool.poetry.dependencies]
+pygame-extend = { path = "../pygame-extend", develop = true, extras = ["pygame"] }
 ```
 
-(equivalent `pip install -e ../pygame-extend` works too, if you're not on uv)
+Then `poetry install` as usual. The `pygame` extra is optional — omit it if
+a project only needs `pygext.core` and never touches the pygame backend
+(e.g. a headless simulation or an AI training loop).
+
+Uses [pygame-ce](https://pyga.me/) (the community fork) rather than the
+original `pygame` package — same `import pygame`, actively maintained.
+Don't install both in the same environment; they conflict.
 
 ## Design rule
 
